@@ -815,30 +815,32 @@ function App() {
                               <div className="text-sm text-gray-200 font-bold tracking-wide">Abuse Prevention Script</div>
                               <div className="text-sm text-gray-400 italic border-l-2 border-gray-700 pl-3 pr-12 leading-relaxed">
                               Add the following script right after the email input field and just before the “Sign Up” button in your signup page.
+                              When the script returns isAbuse: 1, block the signup for that email. When it returns isAbuse: 0, allow the signup to proceed.
                               </div>
                             </div>
                             <div className="bg-gray-800 rounded p-3 font-mono text-sm text-gray-300 overflow-x-auto">
                               <pre className="whitespace-pre-wrap">
 {`// Abuse Prevention Script
-<script>
-// Add abuse prevention logic here
-function validateSignup(userData) {
-    // Check for suspicious patterns
-    // Block if criteria are met
-}
-</script>`}
+thriveStack.reportEmailAbuse("{User_Email}");
+/* eg: thriveStack.setUser("john.doe@acme.xyz");*/`}
                               </pre>
                             </div>
                           </div>
 
                           {/* Example Usage */}
                           <div className="mt-4 bg-gray-900 rounded-lg p-4 border border-gray-300">
-                            <h5 className="text-sm text-gray-200 font-bold tracking-wide">Example: How to use the script</h5>
+                            <h5 className="text-sm text-gray-200 font-bold tracking-wide">Example of how to use the script</h5>
                             <div className="bg-gray-800 rounded p-3 font-mono text-sm text-gray-300 overflow-x-auto">
                               <pre className="whitespace-pre-wrap">
-{`<input type="email" id="email" name="email" />
-<!-- Paste the script here -->
-<button type="submit">Sign Up</button>`}
+{`// Check the response
+if (response.isAbuse === 1) {
+  // Block signup
+  alert("Sorry, we cannot process this signup.");
+  return; // Stop the signup process
+}
+
+// If isAbuse === 0, continue with signup
+proceedWithSignup();`}
                               </pre>
                             </div>
                           </div>
