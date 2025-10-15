@@ -866,7 +866,7 @@ function validateSignup(userData) {
             {showFeatureUnlock && (
               <div className="mb-8">
                 <FeatureUnlockCelebration
-                  features={[
+                  features={activeAbuseStep === 'detection' ? [
                     {
                       id: 'account-list',
                       name: 'Accounts List',
@@ -881,7 +881,7 @@ function validateSignup(userData) {
                       icon: <Users className="w-5 h-5 text-green-600" />,
                       unlocked: true,
                     },
-                  ]}
+                  ] : []}
                   title="Great job! We've detected the events. You've unlocked the following features:"
                   description={activeAbuseStep === 'prevention' ? (
                     <div>
@@ -892,7 +892,7 @@ function validateSignup(userData) {
                     "Great job! We've detected the events. You've unlocked the following features:"
                   )}
                   completed={true}
-                  hideRecentEvents={true}
+                  hideRecentEvents={activeAbuseStep === 'detection'}
                 />
               </div>
             )}
